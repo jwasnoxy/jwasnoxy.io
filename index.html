@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacidad de datos personales en Internet</title>
+
+<style>
+:root{
+  --bg:#07111f;
+  --bg2:#0c1830;
+  --card:#101f36;
+  --card2:#132744;
+  --text:#eef6ff;
+  --muted:#a9bad0;
+  --accent:#55d6be;
+  --accent2:#6da7ff;
+  --warning:#ffd166;
+  --danger:#ff6b7a;
+  --border:rgba(255,255,255,.11);
+  --shadow:0 20px 60px rgba(0,0,0,.28);
+}
+
+*{
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+html{
+  color-scheme:dark;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.65;
+}
+
+button{
+  font:inherit;
+}
+
+.progress{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:4px;
+  background:rgba(255,255,255,.08);
+  z-index:1000;
+}
+
+.progress i{
+  display:block;
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+
+nav{
+  position:fixed;
+  top:4px;
+  left:0;
+  right:0;
+  z-index:999;
+  background:rgba(7,17,31,.82);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+
+.navin{
+  max-width:1150px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:13px 20px;
+}
+
+.brand{
+  font-weight:800;
+  letter-spacing:.4px;
+}
+
+.brand span{
+  color:var(--accent);
+}
+
+.navlinks{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.navlinks a{
+  color:var(--muted);
+  text-decoration:none;
+  padding:7px 10px;
+  border-radius:9px;
+  font-size:.9rem;
+}
+
+.navlinks a:hover{
+  background:var(--card2);
+  color:var(--text);
+}
+
+main{
+  overflow:hidden;
+}
+
+.hero{
+  min-height:92vh;
+  display:grid;
+  place-items:center;
+  position:relative;
+  padding:130px 20px 80px;
+  background:
+    radial-gradient(circle at 75% 25%,rgba(85,214,190,.13),transparent 30%),
+    radial-gradient(circle at 20% 60%,rgba(109,167,255,.14),transparent 34%);
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:linear-gradient(to bottom,#000,transparent 90%);
+}
+
+.hero-inner{
+  max-width:1100px;
+  position:relative;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:60px;
+  align-items:center;
+}
+
+.eyebrow{
+  color:var(--accent);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:.78rem;
+}
+
+.hero h1{
+  font-size:clamp(3rem,7vw,6.2rem);
+  line-height:.95;
+  margin:16px 0 24px;
+  letter-spacing:-4px;
+}
+
+.hero h1 em{
+  font-style:normal;
+  color:var(--accent);
+}
+
+.hero p{
+  max-width:680px;
+  color:var(--muted);
+  font-size:1.15rem;
+}
+
+.hero-card{
+  background:linear-gradient(145deg,rgba(19,39,68,.9),rgba(16,31,54,.82));
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:30px;
+  box-shadow:var(--shadow);
+  transform:rotate(2deg);
+}
+
+.data-orb{
+  height:310px;
+  border-radius:24px;
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle,#18385a 0 4%,transparent 5%),
+    radial-gradient(circle at 50% 50%,rgba(85,214,190,.22),transparent 45%);
+  background-size:28px 28px,100% 100%;
+}
+
+.lock{
+  font-size:5rem;
+  filter:drop-shadow(0 0 24px rgba(85,214,190,.4));
+}
+
+.orbit{
+  position:absolute;
+  border:1px solid rgba(85,214,190,.25);
+  border-radius:50%;
+  animation:spin 14s linear infinite;
+}
+
+.o1{
+  width:80%;
+  height:42%;
+}
+
+.o2{
+  width:55%;
+  height:75%;
+  animation-direction:reverse;
+  animation-duration:10s;
+}
+
+.dot{
+  position:absolute;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 18px var(--accent);
+}
+
+.d1{
+  top:19%;
+  left:18%;
+}
+
+.d2{
+  right:15%;
+  bottom:23%;
+  background:var(--accent2);
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+section{
+  max-width:1100px;
+  margin:auto;
+  padding:100px 20px;
+}
+
+.section-head{
+  max-width:760px;
+  margin-bottom:40px;
+}
+
+.section-head h2{
+  font-size:clamp(2rem,4vw,3.2rem);
+  line-height:1.05;
+  margin:10px 0 14px;
+}
+
+.section-head p{
+  color:var(--muted);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 12px 40px rgba(0,0,0,.15);
+}
+
+.card h3{
+  margin:0 0 10px;
+}
+
+.card p{
+  color:var(--muted);
+  margin:0;
+}
+
+.tag{
+  display:inline-block;
+  font-size:.75rem;
+  font-weight:800;
+  color:#06111d;
+  background:var(--accent);
+  padding:4px 9px;
+  border-radius:999px;
+  margin-bottom:13px;
+}
+
+.question{
+  background:linear-gradient(135deg,#102c43,#10213a);
+  border:1px solid rgba(85,214,190,.25);
+  border-radius:26px;
+  padding:34px;
+  box-shadow:var(--shadow);
+}
+
+.question strong{
+  color:var(--accent);
+  font-size:1.3rem;
+}
+
+.bigquote{
+  font-size:clamp(1.7rem,4vw,3rem);
+  line-height:1.15;
+  margin:18px 0 0;
+  font-weight:800;
+}
+
+.sources{
+  display:grid;
+  gap:14px;
+}
+
+.source{
+  display:grid;
+  grid-template-columns:55px 1fr auto;
+  gap:18px;
+  align-items:center;
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:18px 20px;
+  border-radius:17px;
+}
+
+.source .num{
+  width:45px;
+  height:45px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:var(--card2);
+  color:var(--accent);
+  font-weight:900;
+}
+
+.source p{
+  margin:3px 0 0;
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.source button,
+.cta{
+  border:0;
+  background:var(--accent);
+  color:#06111d;
+  font-weight:800;
+  border-radius:10px;
+  padding:9px 13px;
+  cursor:pointer;
+}
+
+.source button:hover,
+.cta:hover{
+  filter:brightness(1.08);
+  transform:translateY(-1px);
+}
+
+.arco{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.arco .card{
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.arco .card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(85,214,190,.45);
+}
+
+.letter{
+  font-size:3.5rem;
+  font-weight:900;
+  color:var(--accent);
+  line-height:1;
+}
+
+.more{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s ease;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+.arco .card.open .more{
+  max-height:130px;
+  margin-top:12px;
+}
+
+.flow{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  align-items:stretch;
+}
+
+.step{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:20px;
+  border-radius:17px;
+  position:relative;
+}
+
+.step b{
+  display:block;
+  color:var(--accent);
+  font-size:.8rem;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.step strong{
+  display:block;
+  margin-top:6px;
+}
+
+.step span{
+  display:block;
+  color:var(--muted);
+  font-size:.86rem;
+  margin-top:8px;
+}
+
+.risk{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.scenario{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+}
+
+.scenario h3{
+  margin-top:0;
+}
+
+.choice{
+  display:block;
+  width:100%;
+  text-align:left;
+  margin:9px 0;
+  padding:12px 14px;
+  border-radius:11px;
+  border:1px solid var(--border);
+  background:var(--card2);
+  color:var(--text);
+  cursor:pointer;
+}
+
+.choice:hover{
+  border-color:var(--accent);
+}
+
+.choice.correct{
+  border-color:var(--accent);
+  background:rgba(85,214,190,.13);
+}
+
+.choice.wrong{
+  border-color:var(--danger);
+  background:rgba(255,107,122,.10);
+}
+
+.feedback{
+  min-height:25px;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+.conclusion{
+  background:linear-gradient(145deg,#123247,#111e33);
+  border:1px solid rgba(85,214,190,.25);
+  border-radius:28px;
+  padding:45px;
+  box-shadow:var(--shadow);
+}
+
+.conclusion h2{
+  font-size:2.5rem;
+  margin-top:0;
+}
+
+.conclusion p{
+  color:#c7d6e7;
+  font-size:1.08rem;
+}
+
+.pillrow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:25px;
+}
+
+.pill{
+  border:1px solid var(--border);
+  padding:7px 11px;
+  border-radius:999px;
+  color:var(--muted);
+  background:rgba(255,255,255,.03);
+}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:35px 20px;
+  color:var(--muted);
+  text-align:center;
+  font-size:.9rem;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  display:none;
+  place-items:center;
+  padding:20px;
+  z-index:2000;
+}
+
+.modal.show{
+  display:grid;
+}
+
+.modalbox{
+  max-width:650px;
+  width:100%;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:30px;
+  box-shadow:var(--shadow);
+}
+
+.close{
+  float:right;
+  background:transparent;
+  border:0;
+  color:var(--muted);
+  font-size:1.6rem;
+  cursor:pointer;
+}
+
+.modalbox h3{
+  margin-top:0;
+  color:var(--accent);
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:none;
+}
+
+@media(max-width:850px){
+  .hero-inner,
+  .risk{
+    grid-template-columns:1fr;
+  }
+
+  .hero-card{
+    transform:none;
+  }
+
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .arco{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .flow{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .source{
+    grid-template-columns:45px 1fr;
+  }
+
+  .source button{
+    grid-column:2;
+    width:max-content;
+  }
+
+  .navlinks{
+    display:none;
+  }
+}
+
+@media(max-width:560px){
+  .grid,
+  .arco,
+  .flow{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    letter-spacing:-2px;
+  }
+
+  .hero{
+    padding-top:110px;
+  }
+
+  .section-head h2{
+    font-size:2.1rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress">
+  <i id="progress"></i>
+</div>
+
+<nav>
+  <div class="navin">
+    <div class="brand">
+      PRIVACIDAD<span>.</span>
+    </div>
+
+    <div class="navlinks">
+      <a href="#problema">Problema</a>
+      <a href="#fuentes">Fuentes</a>
+      <a href="#arco">ARCO</a>
+      <a href="#analisis">Análisis</a>
+      <a href="#quiz">Pon a prueba</a>
+      <a href="#conclusion">Conclusión</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<section class="hero">
+
+  <div class="hero-inner">
+
+    <div>
+
+      <div class="eyebrow">
+        Fundamentos de Investigación · Etapa 5
+      </div>
+
+      <h1>
+        Tu huella.<br>
+        <em>Tus datos.</em><br>
+        Tu decisión.
+      </h1>
+
+      <p>
+        Una experiencia digital para comprender cómo nuestros hábitos
+        en Internet pueden exponer información personal y qué podemos
+        hacer para protegerla.
+      </p>
+
+      <a class="cta" href="#problema">
+        Explorar la investigación ↓
+      </a>
+
+    </div>
+
+    <div class="hero-card">
+
+      <div class="data-orb">
+
+        <div class="orbit o1"></div>
+        <div class="orbit o2"></div>
+
+        <div class="dot d1"></div>
+        <div class="dot d2"></div>
+
+        <div class="lock">
+          🔐
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="problema" class="reveal">
+
+  <div class="section-head">
+
+    <div class="eyebrow">
+      01 · Planteamiento
+    </div>
+
+    <h2>
+      ¿Por qué importa nuestra privacidad?
+    </h2>
+
+    <p>
+      La investigación parte de una situación cotidiana:
+      nuestra información personal puede quedar disponible en Internet
+      mediante publicaciones, fotografías, ubicaciones, rutinas y otras
+      interacciones digitales.
+    </p>
+
+  </div>
+
+  <div class="question">
+
+    <strong>
+      Pregunta de investigación
+    </strong>
+
+    <div class="bigquote">
+      “¿Cómo podemos evitar un mal uso de nuestra información?”
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="fuentes" class="reveal">
+
+  <div class="section-head">
+
+    <div class="eyebrow">
+      02 · Búsqueda de información
+    </div>
+
+    <h2>
+      Tres fuentes, tres perspectivas
+    </h2>
+
+    <p>
+      El trabajo compara información de tres fuentes para comprender
+      el problema desde distintos ángulos.
+    </p>
+
+  </div>
+
+  <div class="sources">
+
+    <div class="source">
+
+      <div class="num">
+        01
+      </div>
+
+      <div>
+        <b>INAI</b>
+
+        <p>
+          Destaca la huella digital y la importancia de ejercer
+          los derechos ARCO para proteger los datos personales.
+        </p>
+      </div>
+
+      <button data-source="inai">
+        Ver aporte
+      </button>
+
+    </div>
+
+
+    <div class="source">
+
+      <div class="num">
+        02
+      </div>
+
+      <div>
+
+        <b>
+          Agencia Española de Protección de Datos
+        </b>
+
+        <p>
+          Se enfoca en el comportamiento del usuario:
+          permisos excesivos, términos que no se leen y exposición
+          de información sensible.
+        </p>
+
+      </div>
+
+      <button data-source="aepd">
+        Ver aporte
+      </button>
+
+    </div>
+
+
+    <div class="source">
+
+      <div class="num">
+        03
+      </div>
+
+      <div>
+
+        <b>
+          Iniseg
+        </b>
+
+        <p>
+          Aborda el oversharing o sobreexposición y los hábitos
+          que pueden aumentar riesgos como suplantación, estafas o acoso.
+        </p>
+
+      </div>
+
+      <button data-source="iniseg">
+        Ver aporte
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="arco" class="reveal">
+
+  <div class="section-head">
+
+    <div class="eyebrow">
+      03 · Herramienta clave
+    </div>
+
+    <h2>
+      Los derechos ARCO
+    </h2>
+
+    <p>
+      Según la investigación, estos derechos son una herramienta
+      para conocer y controlar el uso de nuestros datos.
+      Haz clic en cada letra.
+    </p>
+
+  </div>
+
+
+  <div class="arco">
+
+    <div class="card arco-card">
+
+      <div class="letter">
+        A
+      </div>
+
+      <h3>
+        Acceso
+      </h3>
+
+      <p>
+        ¿Qué datos tienen sobre mí?
+      </p>
+
+      <div class="more">
+        Derecho a saber qué datos tuyos tienen guardados,
+        quién los tiene y para qué los está usando.
+      </div>
+
+    </div>
+
+
+    <div class="card arco-card">
+
+      <div class="letter">
+        R
+      </div>
+
+      <h3>
+        Rectificación
+      </h3>
+
+      <p>
+        ¿Hay algo incorrecto?
+      </p>
+
+      <div class="more">
+        Puedes exigir que corrijan datos equivocados,
+        desactualizados o incompletos.
+      </div>
+
+    </div>
+
+
+    <div class="card arco-card">
+
+      <div class="letter">
+        C
+      </div>
+
+      <h3>
+        Cancelación
+      </h3>
+
+      <p>
+        ¿Ya no deberían tenerlos?
+      </p>
+
+      <div class="more">
+        Puedes pedir que tus datos sean eliminados cuando
+        corresponda, por ejemplo, si ya no son necesarios.
+      </div>
+
+    </div>
+
+
+    <div class="card arco-card">
+
+      <div class="letter">
+        O
+      </div>
+
+      <h3>
+        Oposición
+      </h3>
+
+      <p>
+        ¿No quieres cierto uso?
+      </p>
+
+      <div class="more">
+        Permite negarte a que utilicen tus datos para
+        determinadas finalidades.
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="analisis" class="reveal">
+
+  <div class="section-head">
+
+    <div class="eyebrow">
+      04 · Análisis y relación
+    </div>
+
+    <h2>
+      De datos sueltos a una explicación
+    </h2>
+
+    <p>
+      La investigación encontró una coincidencia central entre
+      las fuentes: los riesgos no dependen únicamente de fallas
+      externas; nuestros hábitos también influyen en la exposición
+      de información.
+    </p>
+
+  </div>
+
+
+  <div class="flow">
+
+    <div class="step">
+
+      <b>
+        Causa
+      </b>
+
+      <strong>
+        Descuidos diarios
+      </strong>
+
+      <span>
+        Ubicación, permisos, publicaciones y solicitudes.
+      </span>
+
+    </div>
+
+
+    <div class="step">
+
+      <b>
+        Proceso
+      </b>
+
+      <strong>
+        Huella digital
+      </strong>
+
+      <span>
+        La información se acumula con nuestra actividad.
+      </span>
+
+    </div>
+
+
+    <div class="step">
+
+      <b>
+        Exposición
+      </b>
+
+      <strong>
+        Sobreexposición
+      </strong>
+
+      <span>
+        El oversharing aumenta la cantidad de información pública.
+      </span>
+
+    </div>
+
+
+    <div class="step">
+
+      <b>
+        Riesgo
+      </b>
+
+      <strong>
+        Uso indebido
+      </strong>
+
+      <span>
+        Fraudes, suplantación de identidad o acoso.
+      </span>
+
+    </div>
+
+
+    <div class="step">
+
+      <b>
+        Respuesta
+      </b>
+
+      <strong>
+        Privacidad + ARCO
+      </strong>
+
+      <span>
+        Reducir exposición y ejercer nuestros derechos.
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="quiz" class="reveal">
+
+  <div class="section-head">
+
+    <div class="eyebrow">
+      05 · Interactivo
+    </div>
+
+    <h2>
+      ¿Qué harías con tu huella digital?
+    </h2>
+
+    <p>
+      Situaciones rápidas basadas en los problemas identificados
+      en la investigación.
+    </p>
+
+  </div>
+
+
+  <div class="risk">
+
+    <div class="scenario" data-answer="b">
+
+      <h3>
+        📍 Tu red social muestra tu ubicación en tiempo real.
+      </h3>
+
+      <button class="choice" data-choice="a">
+        La dejo pública; no pasa nada.
+      </button>
+
+      <button class="choice" data-choice="b">
+        Reviso la privacidad y evito publicar ubicación sensible.
+      </button>
+
+      <button class="choice" data-choice="c">
+        Acepto todas las solicitudes para tener más seguidores.
+      </button>
+
+      <div class="feedback"></div>
+
+    </div>
+
+
+    <div class="scenario" data-answer="c">
+
+      <h3>
+        🔑 Una aplicación pide permisos que no parecen necesarios.
+      </h3>
+
+      <button class="choice" data-choice="a">
+        Acepto todo sin revisar.
+      </button>
+
+      <button class="choice" data-choice="b">
+        Comparto también mi información personal para que funcione mejor.
+      </button>
+
+      <button class="choice" data-choice="c">
+        Reviso los permisos y doy solo los necesarios.
+      </button>
+
+      <div class="feedback"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="conclusion" class="reveal">
+
+  <div class="conclusion">
+
+    <div class="eyebrow">
+      06 · Conocimiento generado
+    </div>
+
+    <h2>
+      La privacidad también es un hábito.
+    </h2>
+
+    <p>
+      Al analizar y relacionar las fuentes, comprendimos que la
+      información personal puede quedar expuesta por nuestras propias
+      prácticas digitales. La huella digital crece con nuestras
+      publicaciones y decisiones cotidianas; por eso, protegerla
+      implica reducir la exposición, revisar permisos, cuidar la
+      información sensible y conocer herramientas como los derechos ARCO.
+    </p>
+
+    <p>
+      El aprendizaje principal de esta investigación es pasar de saber
+      que “Internet puede ser peligroso” a comprender
+      <strong>
+        cómo nuestros hábitos generan riesgos y qué acciones podemos
+        tomar para reducirlos
+      </strong>.
+    </p>
+
+    <div class="pillrow">
+
+      <span class="pill">
+        Huella digital
+      </span>
+
+      <span class="pill">
+        Oversharing
+      </span>
+
+      <span class="pill">
+        Privacidad
+      </span>
+
+      <span class="pill">
+        Derechos ARCO
+      </span>
+
+      <span class="pill">
+        Hábitos digitales
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+  Proyecto de la Unidad I · Fundamentos de Investigación ·
+  Ing. Informática · Instituto Tecnológico Superior de Monclova · 2026
+</footer>
+
+
+<div class="modal" id="modal">
+
+  <div class="modalbox">
+
+    <button class="close" id="close">
+      ×
+    </button>
+
+    <h3 id="modalTitle"></h3>
+
+    <p id="modalText"></p>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const progress = document.getElementById('progress');
+
+window.addEventListener('scroll', () => {
+
+  const max =
+    document.documentElement.scrollHeight - innerHeight;
+
+  progress.style.width =
+    (max > 0 ? (scrollY / max) * 100 : 0) + '%';
+
+});
+
+
+const observer = new IntersectionObserver(
+  entries => {
+
+    entries.forEach(entry => {
+
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+
+    });
+
+  },
+  {
+    threshold:.12
+  }
+);
+
+
+document
+  .querySelectorAll('.reveal')
+  .forEach(element => observer.observe(element));
+
+
+document
+  .querySelectorAll('.arco-card')
+  .forEach(card => {
+
+    card.addEventListener('click', () => {
+
+      card.classList.toggle('open');
+
+    });
+
+  });
+
+
+const sourceData = {
+
+  inai: [
+    'INAI · Huella digital y derechos ARCO',
+    'La investigación utiliza al INAI para explicar que la participación en redes e Internet alimenta una huella digital. Compartir ubicación, rutinas o fotografías puede aumentar la exposición. Los derechos ARCO aparecen como una herramienta para ejercer control sobre los datos personales.'
+  ],
+
+  aepd: [
+    'Agencia Española de Protección de Datos · Hábitos del usuario',
+    'La fuente señala que muchos riesgos están relacionados con el comportamiento del usuario: otorgar permisos excesivos, no leer términos y condiciones y mantener pública información sensible.'
+  ],
+
+  iniseg: [
+    'Iniseg · Oversharing y sobreexposición',
+    'La investigación retoma el concepto de oversharing para describir la publicación inconsciente de detalles de la vida diaria. Entre los ejemplos se mencionan aceptar solicitudes de desconocidos, publicar ubicación en tiempo real y difundir información escolar o personal sin medir consecuencias.'
+  ]
+
+};
+
+
+const modal = document.getElementById('modal');
+
+document
+  .querySelectorAll('[data-source]')
+  .forEach(button => {
+
+    button.addEventListener('click', () => {
+
+      const data =
+        sourceData[button.dataset.source];
+
+      document.getElementById('modalTitle').textContent =
+        data[0];
+
+      document.getElementById('modalText').textContent =
+        data[1];
+
+      modal.classList.add('show');
+
+    });
+
+  });
+
+
+document.getElementById('close').onclick = () => {
+
+  modal.classList.remove('show');
+
+};
+
+
+modal.addEventListener('click', event => {
+
+  if(event.target === modal){
+    modal.classList.remove('show');
+  }
+
+});
+
+
+document
+  .querySelectorAll('.scenario')
+  .forEach(scenario => {
+
+    scenario
+      .querySelectorAll('.choice')
+      .forEach(choice => {
+
+        choice.addEventListener('click', () => {
+
+          scenario
+            .querySelectorAll('.choice')
+            .forEach(element => {
+
+              element.classList.remove(
+                'correct',
+                'wrong'
+              );
+
+            });
+
+
+          const correct =
+            choice.dataset.choice ===
+            scenario.dataset.answer;
+
+
+          choice.classList.add(
+            correct ? 'correct' : 'wrong'
+          );
+
+
+          scenario.querySelector('.feedback').textContent =
+            correct
+              ? '✓ Buena decisión: reduces la exposición de tu información.'
+              : 'Piensa en qué opción limita mejor la exposición y los permisos innecesarios.';
+
+        });
+
+      });
+
+  });
+
+</script>
+
+</body>
+</html>
